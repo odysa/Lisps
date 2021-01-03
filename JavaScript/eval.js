@@ -6,12 +6,8 @@ function lookUp(key, env) {
 function extEnv(inner, outer) {
   inner.next = outer;
 }
-function interperator(form, env) {
-  if (typeof form === "number") return form;
-  if (typeof form === "string") return lookUp(form, env);
-  const v1 = interperator(form[1], env);
-  const v2 = interperator(form[2], env);
-  switch (form[0]) {
+function evalOp(op, v1, v2) {
+  switch (op) {
     case "+":
       return v1 + v2;
     case "-":
@@ -23,8 +19,19 @@ function interperator(form, env) {
     case "*":
       return v1 * v2;
     default:
-      throw new Error("Invalid operation " + form[0]);
+      throw new Error("Invalid operation " + op);
   }
 }
-const form = ["+", ["-", ["*", "x", 4], 2], ["+", 1, 2]];
+function interperator(form, env) {
+  if (typeof form === "number") return form;
+  if (typeof form === "string") return lookUp(form, env);
+  let res = interperator(form[1], env);
+  const op = form[0];
+  for (let i = 2; i < form.length; ++i) {
+    res = evalOp(op, res, interperator(form[i], env));
+  }
+  return res;
+}
+const form = ["+", ["-", ["*", "x", 4], 2], ["+", 1, 2],1,1,1,1,1];
+
 console.log(interperator(form, defaultEnv));
