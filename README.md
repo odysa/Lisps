@@ -1,2 +1,2 @@
 # Lisps
-Lisp in various languages
+Lisp interpreter in various languages (JavaScript, TypeScript, Go, Java, etc)
