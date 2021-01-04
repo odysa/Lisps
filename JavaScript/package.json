@@ -1,0 +1,20 @@
+{
+  "name": "lisps",
+  "version": "1.0.0",
+  "description": "Lisp interpreter",
+  "main": "eval.js",
+  "type": "module",
+  "scripts": {
+    "test": "node ./eval_test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "\"\""
+  },
+  "keywords": [
+    "interpreter",
+    "lisp"
+  ],
+  "author": "Odysa",
+  "license": "MIT"
+}

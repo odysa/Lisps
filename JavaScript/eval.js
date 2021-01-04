@@ -1,4 +1,4 @@
-const defaultEnv = { next: null, x: 3 };
+const defaultEnv = { next: null };
 function lookUp(key, env) {
   if (!env) return null;
   return env[key] ? env[key] : lookUp(key, env.next);
@@ -32,6 +32,5 @@ function interperator(form, env) {
   }
   return res;
 }
-const form = ["+", ["-", ["*", "x", 4], 2], ["+", 1, 2],1,1,1,1,1];
 
-console.log(interperator(form, defaultEnv));
+export { interperator };
