@@ -1,7 +1,7 @@
 import { interperator } from "./eval.js";
 
 testEval();
-testEnvEval()
+testEnvEval();
 function testEval() {
   const form = ["+", ["-", ["*", 2, 4], 2], ["+", 1, 2], 1, 1, 1, 1, 1];
   const res = interperator(form);
