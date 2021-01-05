@@ -1,7 +1,13 @@
 import { tokenize } from "./lex.js";
 function parse(code) {
-  return parseToken(tokenize(code));
+  const result = [];
+  const tokens = tokenize(code);
+  while (tokens.length) {
+    result.push(parseToken(tokens));
+  }
+  return result;
 }
+
 function parseToken(tokens) {
   if (tokens.length === 0) throw new Error("unexpected EOF");
   const token = tokens.shift();
@@ -14,12 +20,16 @@ function parseToken(tokens) {
     return expr;
   }
   if (token === ")") throw new Error("unexpected )");
-  return atom(token);
+  return categorize(token);
 }
-function atom(token) {
-  const res = parseInt(token);
-  if (!isNaN(res)) return res;
-  return token;
+
+function categorize(token) {
+  if (!isNaN(parseFloat(token)))
+    return { type: "literal", value: parseFloat(token) };
+  // a string
+  if (token[0] === '"' && token.slice(-1) === '"')
+    return { type: "literal", value: token.slice(1, -1) };
+  return { type: "identifier", value: token };
 }
 
 export { parse };
