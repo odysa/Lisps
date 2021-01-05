@@ -13,8 +13,8 @@ class Context {
     return null;
   }
   add(key, value) {
-    if (!env) env = {};
-    env[key] = value;
+    if (!this.env) this.env = {};
+    this.env[key] = value;
   }
 }
 
