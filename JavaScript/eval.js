@@ -1,36 +1,25 @@
-const defaultEnv = { next: null };
-function lookUp(key, env) {
-  if (!env) return null;
-  return env[key] ? env[key] : lookUp(key, env.next);
+import Context from "./context.js";
+import { expr, libs } from "./libs.js";
+import { parse } from "./parse.js";
+
+function interpreter(form, context) {
+  if (!context) return interpreter(form, new Context(libs));
+  if (form instanceof Array) return interpreterList(form, context);
+  if (form.type === "identifier") return context.get(form.value);
+  return form.value;
 }
-function extEnv(inner, outer) {
-  inner.next = outer;
-}
-function evalOp(op, v1, v2) {
-  switch (op) {
-    case "+":
-      return v1 + v2;
-    case "-":
-      return v1 - v2;
-    case "/":
-      return v1 / v2;
-    case "%":
-      return v1 % v2;
-    case "*":
-      return v1 * v2;
-    default:
-      throw new Error("Invalid operation " + op);
-  }
-}
-function interperator(form, env) {
-  if (typeof form === "number") return form;
-  if (typeof form === "string") return lookUp(form, env);
-  let res = interperator(form[1], env);
-  const op = form[0];
-  for (let i = 2; i < form.length; ++i) {
-    res = evalOp(op, res, interperator(form[i], env));
-  }
-  return res;
+function interpreterList(form, context) {
+  if (form[0] in expr) return expr[form[0]](form, context);
+  const list = form.map((item) => interpreter(item, context));
+  if (list[0] instanceof Function)
+    return list[0].apply(undefined, list.slice(1));
+  return list;
 }
 
-export { interperator };
+function run(codes) {
+  const parsed = parse(codes);
+  for (let i = 0; i < parsed.length; ++i) {
+    interpreter(parsed[i]);
+  }
+}
+export { interpreter, run };
