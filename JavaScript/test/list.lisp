@@ -1,0 +1,8 @@
+(define x (list 1 2 3 4))
+(print x)
+(print (car x))
+(print (cdr x))
+(define y (list 5 6 7 8))
+(print y)
+(print (cons x y))
+(print (cons x 1))
