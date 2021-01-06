@@ -14,7 +14,7 @@ function interpreterList(form, context) {
   const list = form.map((item) => interpreter(item, context));
   if (list[0] instanceof Function)
     return list[0].apply(undefined, list.slice(1));
-  return list;
+  return list.length > 1 ? list : list[0];
 }
 
 function run(codes) {
