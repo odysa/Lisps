@@ -34,14 +34,14 @@ var opMap = map[string]opFunc{
 
 type Operation struct {
 	op   string
-	nums []int
+	nums []Node
 }
 
 func (o *Operation) eval() interface{} {
-	res := o.nums[0]
+	res := o.nums[0].eval().(int)
 	f := opMap["op"]
 	for i, _ := range o.nums {
-		res = f(res, o.nums[i])
+		res = f(res, o.nums[i].eval().(int))
 	}
 	return res
 }
