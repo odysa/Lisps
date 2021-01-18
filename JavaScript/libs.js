@@ -1,7 +1,7 @@
 import Context from "./context.js";
 import { interpreter } from "./eval.js";
 import List from "./list.js";
-const accumulate = (args, op) => args.reduce((acc, x) => op(acc, x));
+const accumulate = (items, op) => items.reduce((acc, x) => op(acc, x));
 
 export const libs = {
   "+": (...args) => accumulate(args, (x, y) => x + y),
@@ -59,6 +59,7 @@ export const expr = {
     }
   },
   let: (form, context) => {
+    // create new env
     const env = form[0].reduce((acc, x) => {
       acc.add(x[0].value, interpreter(x[1], context));
       return acc;
@@ -69,7 +70,7 @@ export const expr = {
     // if no args passed, make it a list
     if (!(form[0] instanceof Array)) form[0] = [form[0]];
     const definition = form[0];
-    const body = form[1];
+    const body = form.slice(-1);
     let func = function () {
       const args = arguments;
       const scope = definition.slice(1).reduce((acc, x, i) => {
