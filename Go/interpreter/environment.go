@@ -1,10 +1,10 @@
 package interpreter
 
-type DefinitionMap map[string]interface{}
+type DefinitionMap map[interface{}]interface{}
 
 type Env interface {
-	Get(key string) interface{}
-	Set(key string, val interface{})
+	Get(key interface{}) interface{}
+	Set(key interface{}, val interface{})
 }
 
 type NestEnvironment struct {
@@ -19,7 +19,7 @@ func NewNestEnvironment(parent Env) *NestEnvironment {
 	}
 }
 
-func (n *NestEnvironment) Get(key string) interface{} {
+func (n *NestEnvironment) Get(key interface{}) interface{} {
 	val, ok := n.env[key]
 	if !ok {
 		val = n.parent.Get(key)
@@ -27,7 +27,7 @@ func (n *NestEnvironment) Get(key string) interface{} {
 	return val
 }
 
-func (n *NestEnvironment) Set(key string, val interface{}) {
+func (n *NestEnvironment) Set(key interface{}, val interface{}) {
 	if n.env == nil {
 		n.env = make(DefinitionMap)
 	}
