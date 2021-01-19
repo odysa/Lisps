@@ -1,5 +1,8 @@
 package ast
 
+import "Scheme"
+
 type Node interface {
-	eval() interface{}
+	Eval(env Scheme.Env) interface{}
+	Push(*Node)
 }
