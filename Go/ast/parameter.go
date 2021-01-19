@@ -7,7 +7,7 @@ type Parameters struct {
 }
 
 func (p Parameters) Eval(env interpreter.Env) interface{} {
-	panic("cannot eval")
+	panic("cannot directly eval, please call EvalI")
 }
 
 func (p *Parameters) Push(node *Node) {

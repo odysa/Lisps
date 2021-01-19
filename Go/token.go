@@ -1,4 +1,4 @@
-package parser
+package Scheme
 
 type tokenType int
 const (

@@ -11,6 +11,7 @@ type Definition struct {
 func (d Definition) Eval(env interpreter.Env) interface{} {
 	f := func(args ...interface{}) interface{} {
 		e := interpreter.NewNestEnvironment(env)
+		// bind args passed to new environment
 		for i, a := range args {
 			e.Set(d.params.EvalI(env, i), a)
 		}
