@@ -1,4 +1,4 @@
-package Scheme
+package parser
 
 import "strings"
 

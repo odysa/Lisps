@@ -1,4 +1,4 @@
-package Scheme
+package interpreter
 
 type DefinitionMap map[string]interface{}
 

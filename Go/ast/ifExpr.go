@@ -1,7 +1,7 @@
 package ast
 
 import (
-	"Scheme"
+	"Scheme/interpreter"
 	"Scheme/utils"
 )
 
@@ -16,7 +16,7 @@ func (i *IfExpr) Push(node *Node) {
 	i.children = append(i.children, node)
 }
 
-func (i IfExpr) Eval(env Scheme.Env) interface{} {
+func (i IfExpr) Eval(env interpreter.Env) interface{} {
 	if utils.IsTrue((*i.predicate()).Eval(env)) {
 		return (*i.consequent()).Eval(env)
 	}

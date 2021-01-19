@@ -1,4 +1,4 @@
-package Scheme
+package parser
 
 type tokenType int
 const (
@@ -6,6 +6,6 @@ const (
 	IDENTIFIER
 )
 type Token struct {
-	Type tokenType
+	Type  tokenType
 	Value interface{}
 }

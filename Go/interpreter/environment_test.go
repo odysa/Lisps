@@ -1,6 +1,8 @@
-package Scheme
+package interpreter
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestNestEnvironmentSet_Get(t *testing.T) {
 	env1 := NewNestEnvironment(nil)

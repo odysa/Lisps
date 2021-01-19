@@ -1,8 +1,10 @@
 package ast
 
-import "Scheme"
+import (
+	"Scheme/interpreter"
+)
 
 type Node interface {
-	Eval(env Scheme.Env) interface{}
+	Eval(env interpreter.Env) interface{}
 	Push(*Node)
 }

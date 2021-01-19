@@ -1,12 +1,14 @@
 package ast
 
-import "Scheme"
+import (
+	"Scheme/interpreter"
+)
 
 type Op struct {
 	val string
 }
 
-func (o Op) Eval(env Scheme.Env) interface{} {
+func (o Op) Eval(env interpreter.Env) interface{} {
 	return env.Get(o.val)
 }
 

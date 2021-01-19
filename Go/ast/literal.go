@@ -1,7 +1,7 @@
 package ast
 
 import (
-	"Scheme"
+	"Scheme/interpreter"
 	"strconv"
 )
 
@@ -9,7 +9,7 @@ type Literal struct {
 	value string
 }
 
-func (l Literal) Eval(env Scheme.Env) interface{} {
+func (l Literal) Eval(env interpreter.Env) interface{} {
 	num, err := strconv.ParseFloat(l.value, 'E')
 	if err != nil {
 		return l.value
