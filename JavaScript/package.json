@@ -5,7 +5,7 @@
   "main": "eval.js",
   "type": "module",
   "scripts": {
-    "test": "node ./eval_test.js"
+    "test": "node ./test/*.js"
   },
   "repository": {
     "type": "git",

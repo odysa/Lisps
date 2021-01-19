@@ -8,7 +8,7 @@ testEnvEval();
 function testEval() {
   const form = parse("(+ 10 (* 2 2))");
   const res = interpreter(form);
-  if (res[0] !== 14) {
+  if (res !== 14) {
     throw new Error(`eval failed! got ${res} should be ${14}`);
   }
 }
@@ -16,7 +16,7 @@ function testEnvEval() {
   const env = new Context({ x: 7, y: 1 }, new Context(libs));
   const form = parse("(+ x y)");
   const res = interpreter(form, env);
-  if (res[0] !== 8) {
+  if (res !== 8) {
     throw new Error(`eval failed! got ${res} should be ${7}`);
   }
 }

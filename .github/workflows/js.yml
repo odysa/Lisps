@@ -1,0 +1,17 @@
+name: JavaScriptCI
+
+on: [push]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+
+      - name: Test
+        run: cd JavaScript && npm run test
