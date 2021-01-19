@@ -1,5 +1,7 @@
 package ast
 
+import "Scheme"
+
 type opFunc func(a, b int) int
 
 var opMap = map[string]opFunc{
@@ -33,15 +35,14 @@ var opMap = map[string]opFunc{
 }
 
 type Operation struct {
-	op   string
-	nums []Node
+	children []*Node
 }
 
-func (o *Operation) eval() interface{} {
-	res := o.nums[0].eval().(int)
+func (o *Operation) eval(env Scheme.Env) interface{} {
+	res := (*o.children[0]).eval(env).(int)
 	f := opMap["op"]
-	for i, _ := range o.nums {
-		res = f(res, o.nums[i].eval().(int))
+	for i, _ := range o.children {
+		res = f(res, (*o.children[i]).eval(env).(int))
 	}
 	return res
 }
