@@ -17,3 +17,6 @@ typings/
 
 # Optional eslint cache
 .eslintcache
+
+# binary
+dist

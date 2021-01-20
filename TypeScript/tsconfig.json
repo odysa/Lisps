@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2015"],
+    "module": "AMD",
+    "outFile": "dist.js",
+    "strict": true,
+    "target": "ES2015"
+  },
+  "include": ["src"]
+}
