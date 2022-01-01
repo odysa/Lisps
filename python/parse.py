@@ -1,4 +1,5 @@
 from typing import List
+from python.err import ParseError
 from python.token import Token, TokenType
 from python.utils import is_number
 
@@ -19,7 +20,7 @@ def ParseTokens(tokens):
         return exprs
 
     if token == ')':
-        pass
+        raise ParseError
 
     return token
 
